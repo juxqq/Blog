@@ -2,12 +2,16 @@
 
 {% block title %}Contact{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/contact.css') }}">
+{% endblock %}
+
 {% block body %}
-    <div class="example-wrapper">
+    <div>
         <h1>Hello {{ name }}! ✅</h1>
 
         <form action="">
-            <input type="text" name="name" id="" value="{{ name }}">
+            <input type="text" name="name" id="" value="{{ name }}" aria-label="Nom">
             <input type="submit" value="Envoyer">
         </form>
 

@@ -26,6 +26,8 @@ class ContactController extends AbstractController
     {
         $name = $request->query->get('name');
 
+        dump($name);
+
         return $this->render('contact/index.html.twig', [
             'name' => $name,
             'city' => $city
