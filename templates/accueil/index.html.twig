@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Hello AccueilController!{% endblock %}
 
 {% block body %}
 <style>
@@ -9,8 +9,7 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Contact! ✅</h1>
-
+    <h1>Bienvenue sur l'accueil! ✅</h1>
     <ul>
         <li><a href="{{path('accueil')}}">Accueil</a></li>
         <li><a href="{{ path('contact', {type : 'Montpellier', name : 'Nassim'}) }}">Contactez-moi</a></li>
@@ -20,12 +19,5 @@
             </ol>
         </li>
     </ul>
-    {% if name is defined %}
-        <p>Salut {{ name }}, mon nom est Enzo</p>
-    {% endif %}
-
-    {% if type is defined %}
-    <p>Tu habites dans la ville de {{ type }}, {% if type is same as 'Montpellier' %}comme moi!{% else %}<p> moi j'habite à Montpellier</p>{% endif %}</p>
-    {% endif %}
 </div>
 {% endblock %}
