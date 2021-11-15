@@ -9,16 +9,15 @@
 </style>
 
 <div class="example-wrapper">
+    {# header #}
+    <header> {% include './includes/header.html.twig' %} </header>
+
     <h1>Blog! ✅</h1>
 
-    <ul>
-        <li><a href="{{path('accueil')}}">Accueil</a></li>
-        <li><a href="{{ path('contact', {type : 'Montpellier', name : 'Nassim'}) }}">Contactez-moi</a></li>
-        <li><a href="{{ path('blog') }}">Blog</a><ol>
-                <li><a>Article a</a></li>
-                <li><a>Article b</a></li>
-            </ol>
-        </li>
-    </ul>
+    {# body #}
+    {% include './includes/body.html.twig' %}
+
+    {# footer #}
+    <footer> {% include './includes/footer.html.twig' %} </footer>
 </div>
 {% endblock %}

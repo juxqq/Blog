@@ -9,17 +9,14 @@
 </style>
 
 <div class="example-wrapper">
+    {# header #}
+    <header> {% include './includes/header.html.twig' %} </header>
+
     <h1>Contact! ✅</h1>
 
-    <ul>
-        <li><a href="{{path('accueil')}}">Accueil</a></li>
-        <li><a href="{{ path('contact', {type : 'Montpellier', name : 'Nassim'}) }}">Contactez-moi</a></li>
-        <li><a href="{{ path('blog') }}">Blog</a><ol>
-                <li><a>Article a</a></li>
-                <li><a>Article b</a></li>
-            </ol>
-        </li>
-    </ul>
+    {# body #}
+    {% include './includes/body.html.twig' %}
+
     {% if name is defined %}
         <p>Salut {{ name }}, mon nom est Enzo</p>
     {% endif %}
@@ -27,5 +24,8 @@
     {% if type is defined %}
     <p>Tu habites dans la ville de {{ type }}, {% if type is same as 'Montpellier' %}comme moi!{% else %}<p> moi j'habite à Montpellier</p>{% endif %}</p>
     {% endif %}
+
+    {# footer #}
+    {% include './includes/footer.html.twig' %}
 </div>
 {% endblock %}
