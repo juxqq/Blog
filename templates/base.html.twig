@@ -14,11 +14,20 @@
     {% endblock %}
 </head>
 <body>
+
+<h1>header</h1>
+
 {%  include './includes/header.html.twig' %}
 
-{% block body %}
-    Bloc surchargé
-{% endblock %}
+<main>
+    {% block side %}
+        Un bloc à surcharger dans l'enfant (si je le souhaite)
+    {% endblock %}
+
+    {% block body %}
+        Bloc surchargé
+    {% endblock %}
+</main>
 
 {%  include './includes/footer.html.twig' %}
 </body>
