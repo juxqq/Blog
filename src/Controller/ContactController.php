@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,12 +11,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     /**
+     * @var ContactRepository
+     */
+    private $contactRepository;
+
+    public function __construct(ContactRepository $contactRepository)
+    {
+        $this->contactRepository = $contactRepository;
+    }
+
+    /**
      * @Route("/contactez-nous", name="contact")
      */
     public function index(): Response
     {
         return $this->render('contact/index.html.twig', [
             'name' => 'Alex',
+            'contacts' => $this->contactRepository->findAll(),
         ]);
     }
 
@@ -30,7 +42,7 @@ class ContactController extends AbstractController
 
         return $this->render('contact/index.html.twig', [
             'name' => $name,
-            'city' => $city
+            'city' => $city,
         ]);
     }
 }
