@@ -1,0 +1,24 @@
+@import "function";
+
+// sass
+
+.content {
+  h1 {
+    font-weight: bold;
+    background: $primary;
+    a {
+      @include test();
+    }
+  }
+}
+
+//// css
+//
+//.content h1 {
+//  font-weight: bold;
+//}
+//
+//
+//.content h1 a {
+//  font-weight: bold;
+//}
