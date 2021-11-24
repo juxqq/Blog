@@ -14,6 +14,28 @@
             </h1>
         {% endif %}
 
+        {{ dump(contacts) }}
+
+        <div id="contactName">
+            Récupéré depuis l'API
+        </div>
+
+        <script>
+            fetch('/contact/api').then((data) => {
+                (data.json().then((data) => {
+                    if (data) {
+                        document.getElementById("contactName").innerText = "Le nom du premier contact est : " + data[0].name;
+                    }
+                }));
+            });
+        </script>
+
+        <ul>
+            {% for contact in contacts %}
+                <li>La personne <strong>{{ contact.name }} {{ contact.firstname }}</strong> vous a demandé quelque chose </li>
+            {% endfor %}
+        </ul>
+
         {% if city is defined and city is not empty %}
             <p>
                 Vous êtes sur la ville de {{ city }}
