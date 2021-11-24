@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,9 +43,13 @@ class ContactController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('contact/index.html.twig', [
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+
+        return $this->renderForm('contact/index.html.twig', [
             'name' => 'Alex',
             'contacts' => $this->contactRepository->findAll(),
+            'form' => $form,
         ]);
     }
 
@@ -52,6 +58,7 @@ class ContactController extends AbstractController
      */
     public function contactCity(Request $request, string $city): Response
     {
+        $request->headers->get('Referer');
         $name = $request->query->get('name');
 
         dump($name);
