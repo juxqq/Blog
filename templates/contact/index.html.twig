@@ -13,12 +13,23 @@
 
         <div class="contact-container">
 
+            {% if currentContact is defined and currentContact is not null %}
+                <h2>Mon contact actuel</h2>
+                <p>Demande de contact de : <strong>{{ currentContact.name }}</strong></p>
+            {% endif %}
+
+            <h2>Mes demandes de contact</h2>
+
             {% if contacts is defined %}
-                {{ dump(contacts) }}
+{#                {{ dump(contacts) }}#}
 
                 <ul>
                     {% for contact in contacts %}
-                        <li>Demande de contact de {{ contact.name }} {{ contact.firstname }}</li>
+                        <li>
+                            <a href="{{ path('contactId', {id: contact.id}) }}">
+                                Demande de contact de {{ contact.name }} {{ contact.firstname }}
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
             {% endif %}

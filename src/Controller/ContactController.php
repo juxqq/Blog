@@ -20,6 +20,22 @@ class ContactController extends AbstractController
         $this->contactRepository = $contactRepository;
     }
 
+
+
+    /**
+     * @Route("/contactez-nous/{id}", name="contactId")
+     */
+    public function contactId(int $id): Response
+    {
+        $contact = $this->contactRepository->find($id);
+
+        return $this->render('contact/index.html.twig', [
+            'name' => 'Alex',
+            'contacts' => $this->contactRepository->findAll(),
+            'currentContact' => $contact
+        ]);
+    }
+
     /**
      * @Route("/contactez-nous", name="contact")
      */
