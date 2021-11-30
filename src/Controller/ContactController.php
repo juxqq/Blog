@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Contact;
 
 class ContactController extends AbstractController
 {
@@ -22,11 +24,26 @@ class ContactController extends AbstractController
     public function types(Request $request, string $type = ""): Response
     {
         $name = $request->query->get('name');
-        return $this->render('contact/index.html.twig', [
+
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        dump($form->getViewData());
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($form->getData());
+            $entityManager->flush();
+
+            dump("ok en base !");
+        }
+        return $this->renderForm('contact/index.html.twig', [
             'controller_name' => 'ContactController',
             'type' => $type,
             'name' => $name,
-            'contacts' => $this->contactRepository->findAll()
+            'contacts' => $this->contactRepository->findAll(),
+            'form' => $form
             ]);
     }
 }

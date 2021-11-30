@@ -47,6 +47,10 @@
             <li><a href="{{ path('contact') }}/{{ contact.name | lower }}">{{ contact.name }}</a></li>
         {% endfor %}
 
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
+
         {# footer #}
         {% include './includes/footer.html.twig' %}
     </div>
