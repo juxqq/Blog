@@ -9,7 +9,7 @@ class Contact extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $contactList = ['Enzo', 'Nassim', 'Killian', 'Rayan'];
+        /* $contactList = ['Enzo', 'Nassim', 'Killian', 'Rayan'];
         $lastnameList = ['Tremblay', 'Kridel', 'Malon', 'El-Hatri'];
         $newsletterList = ['1', '0', '1', '0'];
 
@@ -27,7 +27,7 @@ class Contact extends Fixture
             $n = new \App\Entity\Contact();
             $n->setNewsletter($newsletter);
             $manager->persist($n);
-        }
+        }*/
         $manager->flush();
     }
 }

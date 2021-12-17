@@ -31,25 +31,39 @@
         {% include './includes/body.html.twig' %}
 
 
-        {% if name is defined %}
+        {# {% if name is defined %}
             <p>Salut {{ name }}, mon nom est Enzo</p>
         {% endif %}
 
         {% if type is defined %}
             <p>Tu habites dans la ville de {{ type }}, {% if type is same as 'Montpellier' %}comme moi!{% else %}<p> moi
             j'habite à Montpellier</p>{% endif %}</p>
-        {% endif %}
+        {% endif %} #}
 
-        {% set numberOfContacts = contacts | length %}
-        <p>J'ai {{ numberOfContacts }} contacts qui peuvent être contactés.</p>
 
-        {% for contact in contacts %}
-            <li><a href="{{ path('contact') }}/{{ contact.name | lower }}">{{ contact.name }}</a></li>
-        {% endfor %}
 
+        {% if contactNow is defined %}
+        <h1>Mon contact :</h1>
+        <ul>
+            <p>Id: {{ contactNow.id }}</p>
+            <p>Prénom: {{ contactNow.name }}</p>
+            <p>Nom: {{ contactNow.lastname }}</p>
+            <p>Age: {{ contactNow.age }}</p>
+            <p>Newsletter: {{ contactNow.newsletter }}</p>
+        </ul>
+        {% else %}
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             {{ form_widget(form) }}
         {{ form_end(form) }}
+        {% endif %}
+
+        {% set numberOfContacts = contacts | length %}
+        <p>J'ai {{ numberOfContacts }} contact{% if numberOfContacts >= 2%}s{% endif%} à contacter.</p>
+
+        {% for contact in contacts %}
+            <p>Demande de contact de : </p><a href="{{ path('contact') }}/{{ contact.id | lower }}">{{ contact.name}}</a>
+        {% endfor %}
+
 
         {# footer #}
         {% include './includes/footer.html.twig' %}

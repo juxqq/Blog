@@ -19,7 +19,7 @@ class ContactController extends AbstractController
         $this->contactRepository = $contactRepository;
     }
     /**
-     * @Route("/contact/{type}", name="contact")
+     * @Route("/contact", name="contact")
      */
     public function types(Request $request, string $type = ""): Response
     {
@@ -45,5 +45,32 @@ class ContactController extends AbstractController
             'contacts' => $this->contactRepository->findAll(),
             'form' => $form
             ]);
+    }
+    /**
+     * @Route("contact/{id}", name="contactId")
+     */
+    public function login(Request $request, string $id): Response
+    {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($form->getData());
+            $entityManager->flush();
+
+            dump("ok en base!");
+        }
+
+
+        return $this->renderForm('contact/index.html.twig', [
+            'contacts' => $this->contactRepository->findAll(),
+            'contactNow' => $this->contactRepository->find($id),
+            'form' => $form,
+            'controller_name' => 'ContactController'
+        ]);
     }
 }
